@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- BaoMbao Craft Favicon - Stylized wood grain with B -->
+  <defs>
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4B3832"/>
+      <stop offset="100%" style="stop-color:#8B4513"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#E8D5A3"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="32" cy="32" r="30" fill="url(#woodGrad)"/>
+  
+  <!-- Wood grain lines -->
+  <path d="M8 24 Q20 20 32 24 T56 24" fill="none" stroke="#5C4033" stroke-width="1" opacity="0.5"/>
+  <path d="M8 32 Q20 28 32 32 T56 32" fill="none" stroke="#5C4033" stroke-width="0.8" opacity="0.4"/>
+  <path d="M8 40 Q20 36 32 40 T56 40" fill="none" stroke="#5C4033" stroke-width="1" opacity="0.5"/>
+  
+  <!-- Stylized B letter -->
+  <path d="M22 16 L22 48 M22 16 L36 16 Q44 16 44 24 Q44 30 38 32 Q46 34 46 42 Q46 48 36 48 L22 48" 
+        fill="none" 
+        stroke="url(#goldGrad)" 
+        stroke-width="4" 
+        stroke-linecap="round" 
+        stroke-linejoin="round"/>
+  
+  <!-- Decorative corner accent -->
+  <circle cx="52" cy="12" r="4" fill="url(#goldGrad)" opacity="0.8"/>
+</svg>

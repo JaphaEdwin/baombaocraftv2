@@ -1,0 +1,402 @@
+/* ============================================
+   BaoMbao Craft - Image Styles
+   Handles all product/showcase imagery with 
+   AVIF format optimizations
+   ============================================ */
+
+/* ===========================================
+   Picture Element Standards
+   =========================================== */
+picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* ===========================================
+   Hero Section Images
+   =========================================== */
+
+/* Layer 1: Deep background wood texture */
+.hero__layer--1 {
+    background-image: url('../assets/hero/hero-1.avif');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Layer 3: Featured product showcase */
+.hero__product-image {
+    background-image: url('../assets/doors/door-1.avif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Remove SVG overlay when real image is present */
+.hero__product-image::before {
+    display: none;
+}
+
+/* Hero product image picture element */
+.hero__product-image picture img {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+}
+
+/* ===========================================
+   Story/About Section Images
+   =========================================== */
+
+/* Main craftsman/workshop image */
+.story__image--main {
+    background-image: url('../assets/workshop/workshop-1.avif');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Accent detail image */
+.story__image--accent {
+    background-image: url('../assets/details/detail-1.avif');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Story section picture containers */
+.story__image picture {
+    position: absolute;
+    inset: 0;
+}
+
+.story__image picture img {
+    border-radius: var(--radius-md);
+}
+
+/* ===========================================
+   Showroom Gallery Images
+   =========================================== */
+
+/* Base showroom item image with actual images */
+.showroom__item-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* Individual showroom items with real product images */
+.showroom__item[data-project="sentinel"] .showroom__item-image,
+.showroom__item:nth-child(1) .showroom__item-image {
+    background-image: url('../assets/doors/door-1.avif');
+}
+
+.showroom__item[data-project="sovereignty"] .showroom__item-image,
+.showroom__item:nth-child(2) .showroom__item-image {
+    background-image: url('../assets/furniture/furniture-1.avif');
+}
+
+.showroom__item[data-project="connoisseur"] .showroom__item-image,
+.showroom__item:nth-child(3) .showroom__item-image {
+    background-image: url('../assets/furniture/furniture-2.avif');
+}
+
+.showroom__item[data-project="heritage"] .showroom__item-image,
+.showroom__item:nth-child(4) .showroom__item-image {
+    background-image: url('../assets/doors/door-2.avif');
+}
+
+.showroom__item[data-project="curator"] .showroom__item-image,
+.showroom__item:nth-child(5) .showroom__item-image {
+    background-image: url('../assets/furniture/furniture-3.avif');
+}
+
+.showroom__item[data-project="gathering"] .showroom__item-image,
+.showroom__item:nth-child(6) .showroom__item-image {
+    background-image: url('../assets/furniture/furniture-4.avif');
+}
+
+/* Showroom item with picture element */
+.showroom__item-image picture {
+    position: absolute;
+    inset: 0;
+}
+
+.showroom__item-image picture img {
+    transition: transform var(--duration-default) var(--ease-smooth);
+}
+
+.showroom__item:hover .showroom__item-image picture img {
+    transform: scale(1.05);
+}
+
+/* ===========================================
+   Gallery Page Images
+   =========================================== */
+
+/* Gallery items with numbered images */
+.gallery-item:nth-child(1) .gallery-item__image { background-image: url('../assets/doors/door-1.avif'); }
+.gallery-item:nth-child(2) .gallery-item__image { background-image: url('../assets/doors/door-2.avif'); }
+.gallery-item:nth-child(3) .gallery-item__image { background-image: url('../assets/doors/door-3.avif'); }
+.gallery-item:nth-child(4) .gallery-item__image { background-image: url('../assets/furniture/furniture-1.avif'); }
+.gallery-item:nth-child(5) .gallery-item__image { background-image: url('../assets/furniture/furniture-2.avif'); }
+.gallery-item:nth-child(6) .gallery-item__image { background-image: url('../assets/furniture/furniture-3.avif'); }
+.gallery-item:nth-child(7) .gallery-item__image { background-image: url('../assets/doors/door-4.avif'); }
+.gallery-item:nth-child(8) .gallery-item__image { background-image: url('../assets/doors/door-5.avif'); }
+.gallery-item:nth-child(9) .gallery-item__image { background-image: url('../assets/furniture/furniture-4.avif'); }
+.gallery-item:nth-child(10) .gallery-item__image { background-image: url('../assets/furniture/furniture-5.avif'); }
+.gallery-item:nth-child(11) .gallery-item__image { background-image: url('../assets/doors/door-6.avif'); }
+.gallery-item:nth-child(12) .gallery-item__image { background-image: url('../assets/furniture/furniture-6.avif'); }
+
+/* Extended gallery items */
+.gallery-item:nth-child(13) .gallery-item__image { background-image: url('../assets/doors/door-7.avif'); }
+.gallery-item:nth-child(14) .gallery-item__image { background-image: url('../assets/furniture/furniture-7.avif'); }
+.gallery-item:nth-child(15) .gallery-item__image { background-image: url('../assets/doors/door-8.avif'); }
+.gallery-item:nth-child(16) .gallery-item__image { background-image: url('../assets/furniture/furniture-8.avif'); }
+
+/* Gallery item picture container */
+.gallery-item__image picture {
+    position: absolute;
+    inset: 0;
+}
+
+.gallery-item__image picture img {
+    transition: transform var(--duration-default) var(--ease-smooth);
+}
+
+.gallery-item:hover .gallery-item__image picture img {
+    transform: scale(1.08);
+}
+
+/* ===========================================
+   About Page Images
+   =========================================== */
+
+/* Origin/founder image */
+.origin__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+}
+
+.origin__image picture {
+    position: absolute;
+    inset: 0;
+}
+
+.origin__image picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+/* Team member images with picture elements */
+.team-card__image {
+    position: relative;
+    overflow: hidden;
+}
+
+.team-card__image picture {
+    position: absolute;
+    inset: 0;
+}
+
+.team-card__image picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: transform var(--duration-default) var(--ease-smooth);
+}
+
+.team-card:hover .team-card__image picture img {
+    transform: scale(1.05);
+}
+
+/* Workshop video poster with picture element */
+.workshop__video {
+    position: relative;
+}
+
+.workshop__video > picture {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.workshop__video > picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+}
+
+/* ===========================================
+   CTA Section Background Images
+   =========================================== */
+
+.cta__bg-layer--1 {
+    background-image: url('../assets/details/detail-2.avif');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.3;
+}
+
+.cta__bg-layer--2 {
+    background-image: url('../assets/details/detail-3.avif');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+}
+
+/* ===========================================
+   Service Cards with Images
+   =========================================== */
+
+.service-card--with-image .service-card__image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.service-card--with-image .service-card__image picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+    transition: opacity var(--duration-default) var(--ease-smooth);
+}
+
+.service-card--with-image:hover .service-card__image picture img {
+    opacity: 0.25;
+}
+
+/* ===========================================
+   Process Section Images
+   =========================================== */
+
+.process__step-image {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 4/3;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-top: var(--space-md);
+}
+
+.process__step-image picture img {
+    border-radius: var(--radius-md);
+}
+
+/* Step images */
+.process__step:nth-child(1) .process__step-image { background-image: url('../assets/details/detail-4.avif'); }
+.process__step:nth-child(2) .process__step-image { background-image: url('../assets/details/detail-5.avif'); }
+.process__step:nth-child(3) .process__step-image { background-image: url('../assets/details/detail-6.avif'); }
+.process__step:nth-child(4) .process__step-image { background-image: url('../assets/details/detail-7.avif'); }
+
+/* ===========================================
+   Lightbox / Modal Images
+   =========================================== */
+
+.lightbox__image {
+    max-width: 90vw;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+.modal__project-image picture {
+    width: 100%;
+    height: 100%;
+}
+
+.modal__project-image picture img {
+    border-radius: var(--radius-md);
+}
+
+/* ===========================================
+   Responsive Image Adjustments
+   =========================================== */
+
+@media (max-width: 767px) {
+    /* Smaller background sizes for mobile */
+    .hero__layer--1,
+    .hero__product-image,
+    .cta__bg-layer--1,
+    .cta__bg-layer--2 {
+        background-size: cover;
+    }
+    
+    /* Adjust gallery item images for mobile */
+    .gallery-item__image picture img {
+        object-position: center top;
+    }
+}
+
+@media (min-width: 768px) {
+    /* Tablet and up - enable hover effects */
+    .showroom__item-image picture img,
+    .gallery-item__image picture img {
+        transition: transform 0.6s var(--ease-smooth);
+    }
+}
+
+/* ===========================================
+   Image Loading States
+   =========================================== */
+
+picture img {
+    background-color: var(--mahogany);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+picture img[loading="lazy"] {
+    opacity: 0;
+}
+
+picture img[loading="lazy"].loaded,
+picture img[loading="lazy"]:not([data-src]) {
+    opacity: 1;
+}
+
+/* ===========================================
+   Decorative Image Overlays
+   =========================================== */
+
+.image-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+}
+
+.image-overlay-vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+
+/* Wood grain texture overlay for images */
+.image-wood-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('../assets/patterns/wood-grain.svg');
+    background-size: 300px;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}

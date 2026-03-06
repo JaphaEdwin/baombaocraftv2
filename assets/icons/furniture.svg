@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Furniture (Table) Icon -->
+  <defs>
+    <linearGradient id="furnGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#B8972F"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Table top -->
+  <rect x="4" y="20" width="56" height="8" rx="2" fill="none" stroke="url(#furnGrad)" stroke-width="2.5"/>
+  
+  <!-- Drawer line -->
+  <line x1="10" y1="24" x2="54" y2="24" stroke="url(#furnGrad)" stroke-width="1.5"/>
+  
+  <!-- Table legs -->
+  <rect x="8" y="28" width="6" height="28" rx="1" fill="none" stroke="url(#furnGrad)" stroke-width="2"/>
+  <rect x="50" y="28" width="6" height="28" rx="1" fill="none" stroke="url(#furnGrad)" stroke-width="2"/>
+  
+  <!-- Drawer handle -->
+  <line x1="28" y1="24" x2="36" y2="24" stroke="url(#furnGrad)" stroke-width="3" stroke-linecap="round"/>
+</svg>

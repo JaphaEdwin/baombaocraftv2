@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" preserveAspectRatio="none">
+  <!-- Wood Grain Pattern - Tileable Background -->
+  <defs>
+    <pattern id="woodGrain" patternUnits="userSpaceOnUse" width="400" height="200">
+      <rect width="400" height="200" fill="#4B3832"/>
+      
+      <!-- Primary grain lines -->
+      <path d="M0 20 Q100 15 200 20 T400 20" fill="none" stroke="#5C4033" stroke-width="1.5" opacity="0.4"/>
+      <path d="M0 35 Q100 30 200 35 T400 35" fill="none" stroke="#3D2A24" stroke-width="1" opacity="0.3"/>
+      <path d="M0 50 Q100 45 200 50 T400 50" fill="none" stroke="#5C4033" stroke-width="2" opacity="0.5"/>
+      <path d="M0 65 Q100 62 200 65 T400 65" fill="none" stroke="#3D2A24" stroke-width="0.8" opacity="0.3"/>
+      
+      <path d="M0 85 Q100 80 200 85 T400 85" fill="none" stroke="#5C4033" stroke-width="1.5" opacity="0.4"/>
+      <path d="M0 100 Q100 95 200 100 T400 100" fill="none" stroke="#3D2A24" stroke-width="2.5" opacity="0.5"/>
+      <path d="M0 115 Q100 112 200 115 T400 115" fill="none" stroke="#5C4033" stroke-width="1" opacity="0.35"/>
+      
+      <path d="M0 135 Q100 130 200 135 T400 135" fill="none" stroke="#3D2A24" stroke-width="1.5" opacity="0.4"/>
+      <path d="M0 150 Q100 147 200 150 T400 150" fill="none" stroke="#5C4033" stroke-width="2" opacity="0.45"/>
+      <path d="M0 165 Q100 160 200 165 T400 165" fill="none" stroke="#3D2A24" stroke-width="0.8" opacity="0.3"/>
+      <path d="M0 180 Q100 175 200 180 T400 180" fill="none" stroke="#5C4033" stroke-width="1.5" opacity="0.4"/>
+      
+      <!-- Knot details -->
+      <ellipse cx="80" cy="70" rx="15" ry="8" fill="none" stroke="#3D2A24" stroke-width="1.5" opacity="0.3"/>
+      <ellipse cx="320" cy="140" rx="12" ry="6" fill="none" stroke="#3D2A24" stroke-width="1" opacity="0.25"/>
+    </pattern>
+  </defs>
+  
+  <rect width="400" height="200" fill="url(#woodGrain)"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Restoration/Tools Icon -->
+  <defs>
+    <linearGradient id="restoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#B8972F"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Chisel -->
+  <path d="M8 56 L16 48 L24 40 L24 32 L16 24 L8 32 Z" fill="none" stroke="url(#restoreGrad)" stroke-width="2" stroke-linejoin="round"/>
+  <line x1="16" y1="24" x2="8" y2="8" stroke="url(#restoreGrad)" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Hammer -->
+  <path d="M44 8 L56 20 L52 24 L40 12 Z" fill="url(#restoreGrad)"/>
+  <line x1="40" y1="12" x2="28" y2="24" stroke="url(#restoreGrad)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="28" y1="24" x2="20" y2="32" stroke="url(#restoreGrad)" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Wood piece being restored -->
+  <rect x="32" y="36" width="24" height="20" rx="2" fill="none" stroke="url(#restoreGrad)" stroke-width="2"/>
+  <path d="M36 40 Q44 38 52 40" fill="none" stroke="url(#restoreGrad)" stroke-width="1" opacity="0.6"/>
+  <path d="M36 46 Q44 44 52 46" fill="none" stroke="url(#restoreGrad)" stroke-width="1" opacity="0.6"/>
+  <path d="M36 52 Q44 50 52 52" fill="none" stroke="url(#restoreGrad)" stroke-width="1" opacity="0.6"/>
+  
+  <!-- Sparkle (restoration shine) -->
+  <path d="M28 44 L30 48 L28 52 L26 48 Z" fill="url(#restoreGrad)" opacity="0.8"/>
+</svg>
