@@ -352,7 +352,7 @@
     }
 
     // ========================================
-    // SHOWROOM CAROUSEL
+    // SHOWROOM CAROUSEL - 360 INFINITE SCROLL
     // ========================================
 
     function initShowroomCarousel() {
@@ -367,23 +367,29 @@
 
         if (slides.length === 0) return;
 
-        // Clone slides for infinite scroll effect
-        slides.forEach(slide => {
-            const clone = slide.cloneNode(true);
-            track.appendChild(clone);
-        });
+        // Clone slides twice for seamless 360 infinite scroll
+        for (let i = 0; i < 2; i++) {
+            slides.forEach(slide => {
+                const clone = slide.cloneNode(true);
+                clone.setAttribute('aria-hidden', 'true');
+                track.appendChild(clone);
+            });
+        }
 
         // Calculate slide width for navigation
         const getSlideWidth = () => {
             const slide = track.querySelector('.showroom__slide');
-            const style = window.getComputedStyle(slide);
             const gap = parseInt(window.getComputedStyle(track).gap) || 32;
             return slide.offsetWidth + gap;
         };
 
+        // Get total width of original slides
+        const getOriginalWidth = () => {
+            return getSlideWidth() * slides.length;
+        };
+
         let isHovered = false;
         let scrollPosition = 0;
-        let animationId = null;
 
         // Pause animation on hover
         track.addEventListener('mouseenter', () => {
@@ -398,63 +404,57 @@
             if (progressBar) progressBar.style.animationPlayState = 'running';
         });
 
+        // Smooth navigation with wrap-around for 360 effect
+        const navigateSlide = (direction) => {
+            const slideWidth = getSlideWidth();
+            const originalWidth = getOriginalWidth();
+            
+            track.style.animation = 'none';
+            const currentTranslate = getComputedStyle(track).transform;
+            const matrix = new DOMMatrix(currentTranslate);
+            
+            scrollPosition = matrix.m41 + (direction * slideWidth);
+            
+            // Wrap around for 360 effect
+            if (scrollPosition > 0) {
+                scrollPosition = -originalWidth + slideWidth;
+            } else if (scrollPosition < -originalWidth * 2) {
+                scrollPosition = -originalWidth;
+            }
+            
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            track.style.transform = `translate3d(${scrollPosition}px, 0, 0)`;
+            
+            // Resume animation after interaction
+            setTimeout(() => {
+                track.style.transition = '';
+                if (!isHovered) {
+                    track.style.transform = '';
+                    track.style.animation = '';
+                }
+            }, 3000);
+        };
+
         // Navigation buttons
         if (prevBtn) {
-            prevBtn.addEventListener('click', () => {
-                const slideWidth = getSlideWidth();
-                track.style.animation = 'none';
-                const currentTranslate = getComputedStyle(track).transform;
-                const matrix = new DOMMatrix(currentTranslate);
-                scrollPosition = matrix.m41 + slideWidth;
-                
-                // Prevent scrolling past start
-                if (scrollPosition > 0) scrollPosition = 0;
-                
-                track.style.transform = `translateX(${scrollPosition}px)`;
-                
-                // Resume animation after a delay
-                setTimeout(() => {
-                    if (!isHovered) {
-                        track.style.transform = '';
-                        track.style.animation = '';
-                    }
-                }, 3000);
-            });
+            prevBtn.addEventListener('click', () => navigateSlide(1));
         }
 
         if (nextBtn) {
-            nextBtn.addEventListener('click', () => {
-                const slideWidth = getSlideWidth();
-                track.style.animation = 'none';
-                const currentTranslate = getComputedStyle(track).transform;
-                const matrix = new DOMMatrix(currentTranslate);
-                scrollPosition = matrix.m41 - slideWidth;
-                
-                // Calculate max scroll
-                const maxScroll = -(track.scrollWidth / 2);
-                if (scrollPosition < maxScroll) scrollPosition = 0;
-                
-                track.style.transform = `translateX(${scrollPosition}px)`;
-                
-                // Resume animation after a delay
-                setTimeout(() => {
-                    if (!isHovered) {
-                        track.style.transform = '';
-                        track.style.animation = '';
-                    }
-                }, 3000);
-            });
+            nextBtn.addEventListener('click', () => navigateSlide(-1));
         }
 
-        // Touch/drag support for mobile
+        // Touch/drag support for mobile with 360 wrap
         let isDragging = false;
         let startX = 0;
         let currentX = 0;
+        let dragVelocity = 0;
 
         track.addEventListener('touchstart', (e) => {
             isDragging = true;
             startX = e.touches[0].clientX;
             track.style.animationPlayState = 'paused';
+            track.style.animation = 'none';
             if (progressBar) progressBar.style.animationPlayState = 'paused';
         }, { passive: true });
 
@@ -462,25 +462,37 @@
             if (!isDragging) return;
             currentX = e.touches[0].clientX;
             const diff = currentX - startX;
-            track.style.animation = 'none';
+            dragVelocity = diff;
             const currentTranslate = getComputedStyle(track).transform;
             const matrix = new DOMMatrix(currentTranslate);
-            track.style.transform = `translateX(${matrix.m41 + diff}px)`;
+            track.style.transform = `translate3d(${matrix.m41 + diff}px, 0, 0)`;
             startX = currentX;
         }, { passive: true });
 
         track.addEventListener('touchend', () => {
             isDragging = false;
+            // Snap to nearest slide with momentum
+            const slideWidth = getSlideWidth();
+            const currentTranslate = getComputedStyle(track).transform;
+            const matrix = new DOMMatrix(currentTranslate);
+            const momentum = dragVelocity * 2;
+            const targetPosition = matrix.m41 + momentum;
+            const snappedPosition = Math.round(targetPosition / slideWidth) * slideWidth;
+            
+            track.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+            track.style.transform = `translate3d(${snappedPosition}px, 0, 0)`;
+            
             // Resume animation after a delay
             setTimeout(() => {
+                track.style.transition = '';
                 track.style.transform = '';
                 track.style.animation = '';
                 track.style.animationPlayState = 'running';
                 if (progressBar) progressBar.style.animationPlayState = 'running';
-            }, 2000);
+            }, 2500);
         });
 
-        console.log('Showroom carousel initialized');
+        console.log('Showroom 360 carousel initialized');
     }
 
     // ========================================

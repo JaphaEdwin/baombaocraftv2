@@ -1206,20 +1206,22 @@ strong {
     display: flex;
     gap: var(--space-lg);
     padding: 0 var(--space-xl);
-    animation: showroomScroll 40s linear infinite;
+    animation: showroomScroll 30s linear infinite;
     width: max-content;
+    will-change: transform;
 }
 
 .showroom__track:hover {
     animation-play-state: paused;
 }
 
+/* Smooth 360 infinite scroll - seamless loop */
 @keyframes showroomScroll {
     0% {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
     100% {
-        transform: translateX(-50%);
+        transform: translate3d(-50%, 0, 0);
     }
 }
 
