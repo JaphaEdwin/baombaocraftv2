@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BaoMbao Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f8f7f4; min-height: 100vh; }
+        
+        .auth-loading { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .auth-loading::after { content: 'Verifying access...'; color: #4A3728; font-size: 18px; }
+        
+        .admin { display: none; }
+        .admin.active { display: flex; min-height: 100vh; }
+        
+        .sidebar { width: 260px; background: #4A3728; color: white; padding: 24px 0; display: flex; flex-direction: column; }
+        .sidebar__logo { padding: 0 24px 24px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px; }
+        .sidebar__logo h1 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; }
+        .sidebar__logo span { font-size: 12px; opacity: 0.7; }
+        
+        .sidebar__nav { flex: 1; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 24px; color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.2s; cursor: pointer; }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
+        .nav-item svg { width: 20px; height: 20px; }
+        
+        .sidebar__footer { padding: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .logout-btn { width: 100%; padding: 12px; background: rgba(255,255,255,0.1); border: none; color: white; border-radius: 8px; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+        .logout-btn:hover { background: rgba(255,255,255,0.2); }
+        
+        .main { flex: 1; padding: 32px; overflow-y: auto; }
+        .main__header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+        .main__title { font-family: 'Playfair Display', serif; font-size: 28px; color: #4A3728; }
+        
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-bottom: 32px; }
+        .stat-card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .stat-card__label { font-size: 14px; color: #666; margin-bottom: 8px; }
+        .stat-card__value { font-size: 32px; font-weight: 700; color: #4A3728; }
+        .stat-card__change { font-size: 13px; color: #16a34a; margin-top: 4px; }
+        .stat-card__change.negative { color: #dc2626; }
+        
+        .panel { background: white; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); overflow: hidden; }
+        .panel__header { padding: 20px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .panel__title { font-weight: 600; color: #4A3728; }
+        .panel__action { color: #4A3728; font-size: 14px; text-decoration: none; cursor: pointer; }
+        .panel__action:hover { text-decoration: underline; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px 24px; text-align: left; border-bottom: 1px solid #f3f4f6; }
+        th { font-size: 12px; font-weight: 600; color: #666; text-transform: uppercase; letter-spacing: 0.5px; background: #fafafa; }
+        td { font-size: 14px; color: #374151; }
+        
+        .status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+        .status--pending { background: #fef3c7; color: #92400e; }
+        .status--completed { background: #d1fae5; color: #065f46; }
+        .status--processing { background: #dbeafe; color: #1e40af; }
+        
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        .coming-soon { padding: 80px 24px; text-align: center; }
+        .coming-soon h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: #4A3728; margin-bottom: 12px; }
+        .coming-soon p { color: #666; }
+        
+        @media (max-width: 768px) {
+            .admin.active { flex-direction: column; }
+            .sidebar { width: 100%; padding: 16px 0; }
+            .sidebar__nav { display: flex; overflow-x: auto; padding: 0 16px; gap: 8px; }
+            .nav-item { padding: 10px 16px; white-space: nowrap; border-radius: 8px; }
+            .sidebar__footer { display: none; }
+            .main { padding: 20px; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-loading" id="auth-loading"></div>
+    
+    <div class="admin" id="admin">
+        <aside class="sidebar">
+            <div class="sidebar__logo">
+                <h1>BaoMbao</h1>
+                <span>Admin Dashboard</span>
+            </div>
+            <nav class="sidebar__nav">
+                <a class="nav-item active" data-section="dashboard">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    Dashboard
+                </a>
+                <a class="nav-item" data-section="orders">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    Orders
+                </a>
+                <a class="nav-item" data-section="products">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    Products
+                </a>
+                <a class="nav-item" data-section="customers">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    Customers
+                </a>
+                <a class="nav-item" data-section="analytics">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Analytics
+                </a>
+                <a class="nav-item" data-section="settings">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="sidebar__footer">
+                <button class="logout-btn" id="logout-btn">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main">
+            <div class="section active" id="section-dashboard">
+                <div class="main__header">
+                    <h1 class="main__title">Dashboard</h1>
+                    <span id="current-date"></span>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-card__label">Total Revenue</div>
+                        <div class="stat-card__value">UGX 24.5M</div>
+                        <div class="stat-card__change">↑ 12% from last month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Orders</div>
+                        <div class="stat-card__value">156</div>
+                        <div class="stat-card__change">↑ 8% from last month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Customers</div>
+                        <div class="stat-card__value">89</div>
+                        <div class="stat-card__change">↑ 23% from last month</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card__label">Avg. Order Value</div>
+                        <div class="stat-card__value">UGX 157K</div>
+                        <div class="stat-card__change negative">↓ 3% from last month</div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel__header">
+                        <h3 class="panel__title">Recent Orders</h3>
+                        <a class="panel__action" data-section="orders">View All</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr><th>Order ID</th><th>Customer</th><th>Product</th><th>Amount</th><th>Status</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>#ORD-2024-001</td><td>Sarah Namukasa</td><td>Custom Bamboo Door</td><td>UGX 850,000</td><td><span class="status status--processing">Processing</span></td></tr>
+                            <tr><td>#ORD-2024-002</td><td>John Mukisa</td><td>Bamboo Furniture Set</td><td>UGX 1,200,000</td><td><span class="status status--pending">Pending</span></td></tr>
+                            <tr><td>#ORD-2024-003</td><td>Grace Achieng</td><td>Interior Panels</td><td>UGX 450,000</td><td><span class="status status--completed">Completed</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="section" id="section-orders"><div class="main__header"><h1 class="main__title">Orders</h1></div><div class="coming-soon"><h2>Order Management</h2><p>Full order management coming soon.</p></div></div>
+            <div class="section" id="section-products"><div class="main__header"><h1 class="main__title">Products</h1></div><div class="coming-soon"><h2>Product Catalog</h2><p>Manage your bamboo products here. Coming soon.</p></div></div>
+            <div class="section" id="section-customers"><div class="main__header"><h1 class="main__title">Customers</h1></div><div class="coming-soon"><h2>Customer Directory</h2><p>CRM features coming soon.</p></div></div>
+            <div class="section" id="section-analytics"><div class="main__header"><h1 class="main__title">Analytics</h1></div><div class="coming-soon"><h2>Business Analytics</h2><p>Analytics dashboard coming soon.</p></div></div>
+            <div class="section" id="section-settings"><div class="main__header"><h1 class="main__title">Settings</h1></div><div class="coming-soon"><h2>Admin Settings</h2><p>Settings panel coming soon.</p></div></div>
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const token = localStorage.getItem('bao_admin_token');
+            if (!token) { window.location.href = '/'; return; }
+            try {
+                const p = JSON.parse(atob(token));
+                if (p.exp < Date.now()) { localStorage.removeItem('bao_admin_token'); window.location.href = '/'; return; }
+                document.getElementById('auth-loading').style.display = 'none';
+                document.getElementById('admin').classList.add('active');
+            } catch { localStorage.removeItem('bao_admin_token'); window.location.href = '/'; }
+        })();
+        
+        document.querySelectorAll('.nav-item, .panel__action').forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = item.dataset.section;
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                document.querySelector(`.nav-item[data-section="${section}"]`)?.classList.add('active');
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(`section-${section}`)?.classList.add('active');
+            });
+        });
+        
+        document.getElementById('logout-btn')?.addEventListener('click', () => {
+            localStorage.removeItem('bao_admin_token');
+            localStorage.removeItem('bao_admin_user');
+            window.location.href = '/';
+        });
+        
+        document.getElementById('current-date').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    </script>
+</body>
+</html>

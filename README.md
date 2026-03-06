@@ -1,8 +1,17 @@
-# BaoMbao Craft - Premium Woodwork Website
+# BaoMbao Craft - Premium Woodwork Platform
 
-A virtual showroom website for BaoMbao Craft, Uganda's premier bespoke woodwork studio. This ultra-premium website replaces the need for physical showroom visits by providing an immersive, high-end digital experience.
+A comprehensive digital platform for BaoMbao Craft, Uganda's premier bespoke woodwork studio. This platform includes an ultra-premium website, admin dashboard, and customer portal for end-to-end business management.
 
-## Features
+## Platform Overview
+
+| Component | Port | Description |
+|-----------|------|-------------|
+| Website | Static | Public-facing marketing site |
+| Admin Dashboard | 5173 | Internal management (quotes, projects, CMS) |
+| Customer Portal | 5174 | Customer accounts (quotes, project tracking) |
+| API Server | 3000 | Node.js/Express backend |
+
+## Website Features
 
 - **5-Layer Parallax Hero** - Custom parallax system with configurable depth speeds
 - **Lenis Smooth Scrolling** - Buttery smooth inertial scrolling
@@ -244,6 +253,71 @@ For production, consider:
 | main.js | 15 KB |
 | parallax.js | 6 KB |
 | **Total** | ~130 KB |
+
+---
+
+## Platform Backend & Frontends
+
+### Backend (server/)
+
+Node.js/Express API with TypeScript, Prisma ORM, and PostgreSQL.
+
+```bash
+cd server
+cp .env.example .env   # Configure environment
+npm install
+npx prisma generate    # Generate Prisma client
+npx prisma migrate dev # Run migrations
+npm run dev            # Start dev server on :3000
+```
+
+**Features:**
+- JWT Authentication with refresh tokens
+- Role-based access control (customer, partner, admin, super_admin)
+- MTN MoMo & Airtel Money payment integration
+- Email (SendGrid) & SMS (Twilio) notifications
+- PDF generation for quotes & receipts
+- Analytics & KPI tracking
+
+### Admin Dashboard (admin/)
+
+React + Vite admin interface for internal operations.
+
+```bash
+cd admin
+cp .env.example .env
+npm install
+npm run dev   # Start on :5173
+```
+
+**Pages:** Dashboard, Quotations, Projects, Customers, Inventory, Analytics, CMS, Settings
+
+### Customer Portal (portal/)
+
+React + Vite customer-facing app for quote requests and project tracking.
+
+```bash
+cd portal
+cp .env.example .env
+npm install
+npm run dev   # Start on :5174
+```
+
+**Pages:** Dashboard, My Quotes, My Projects, Request Quote, Profile
+
+### Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Backend | Node.js 20, Express, TypeScript |
+| Database | PostgreSQL + Prisma ORM |
+| Auth | JWT, bcrypt, RBAC |
+| Payments | MTN MoMo, Airtel Money, Flutterwave |
+| Frontend | React 18, Vite, TailwindCSS |
+| State | Zustand, React Query |
+| Charts | Recharts |
+
+---
 
 ## Credits
 

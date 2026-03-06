@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BaoMbao Craft Portfolio - Browse our completed projects including kitchens, wardrobes, furniture, and hospitality installations in Uganda.">
+    <meta name="keywords" content="woodcraft portfolio, kitchen projects Uganda, custom furniture Kampala, wardrobe designs, hospitality fit-out">
+    <meta name="author" content="BaoMbao Craft">
+    <meta name="robots" content="index, follow">
+    <title>Portfolio | BaoMbao Craft</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://baombao.com/portfolio.html">
+    <meta property="og:title" content="Project Portfolio | BaoMbao Craft">
+    <meta property="og:description" content="Browse our collection of completed woodcraft projects - kitchens, wardrobes, doors, furniture, and hospitality installations.">
+    <meta property="og:image" content="https://baombao.com/assets/furniture/furniture-1.avif">
+    
+    <link rel="canonical" href="https://baombao.com/portfolio.html">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#343434">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <a href="#main-content" class="visually-hidden">Skip to main content</a>
+    
+    <!-- Header -->
+    <header class="header header--solid" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
+                <img src="assets/logo.png" alt="BaoMbao Craft" class="nav__logo-img">
+            </a>
+            
+            <ul class="nav__menu" id="nav-menu">
+                <li><a href="products.html" class="nav__link">Products</a></li>
+                <li><a href="portfolio.html" class="nav__link nav__link--active">Portfolio</a></li>
+                <li><a href="materials.html" class="nav__link">Materials</a></li>
+                <li><a href="about.html" class="nav__link">About</a></li>
+                <li><a href="journal.html" class="nav__link">Journal</a></li>
+                <li><a href="contact.html" class="nav__link nav__link--cta">Get Quote</a></li>
+            </ul>
+            
+            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
+                <span class="nav__toggle-line"></span>
+                <span class="nav__toggle-line"></span>
+                <span class="nav__toggle-line"></span>
+            </button>
+        </nav>
+    </header>
+    
+    <main id="main-content">
+        <!-- Page Hero -->
+        <section class="page-hero page-hero--with-bg">
+            <div class="page-hero__bg">
+                <img src="assets/workshop/workshop-2.avif" alt="BaoMbao craftsmanship" loading="eager">
+            </div>
+            <div class="container page-hero__content">
+                <p class="page-hero__tagline">Our Work</p>
+                <h1 class="page-hero__title">Project Portfolio</h1>
+                <p class="page-hero__text">
+                    Browse our collection of completed projects. Each piece showcases our commitment to quality, attention to detail, and authentic African craftsmanship.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Gallery Filters -->
+        <section class="section--sm bg-cream">
+            <div class="container">
+                <div class="gallery-filters" role="tablist" aria-label="Filter projects by category">
+                    <button class="gallery-filter is-active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
+                    <button class="gallery-filter" data-filter="kitchen" role="tab" aria-selected="false">Kitchens</button>
+                    <button class="gallery-filter" data-filter="wardrobe" role="tab" aria-selected="false">Wardrobes</button>
+                    <button class="gallery-filter" data-filter="door" role="tab" aria-selected="false">Doors</button>
+                    <button class="gallery-filter" data-filter="furniture" role="tab" aria-selected="false">Furniture</button>
+                    <button class="gallery-filter" data-filter="hospitality" role="tab" aria-selected="false">Hospitality</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Portfolio Grid -->
+        <section class="section bg-cream">
+            <div class="container">
+                <div class="portfolio-grid" id="portfolio-grid">
+                    <!-- Featured Large Item -->
+                    <a href="projects/kololo-kitchen.html" class="portfolio-item portfolio-item--large" data-category="kitchen">
+                        <div class="portfolio-item__image">
+                            <img src="assets/furniture/furniture-1.avif" alt="Modern kitchen installation" loading="lazy">
+                        </div>
+                        <div class="portfolio-item__overlay">
+                            <span class="portfolio-item__category">Kitchen Systems</span>
+                            <h3 class="portfolio-item__title">Contemporary Kitchen</h3>
+                            <p class="portfolio-item__location">Kololo Residence</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="portfolio-item" data-category="wardrobe">
+                        <div class="portfolio-item__image">
+                            <img src="assets/furniture/furniture-2.avif" alt="Walk-in wardrobe" loading="lazy">
+                        </div>
+                        <div class="portfolio-item__overlay">
+                            <span class="portfolio-item__category">Wardrobes</span>
+                            <h3 class="portfolio-item__title">Walk-In Wardrobe</h3>
+                            <p class="portfolio-item__location">Muyenga Home</p>
+                        </div>
+                    </a>
+                    
+                    <a href="#" class="portfolio-item" data-category="door">
+                        <div class="portfolio-item__image">
+                            <img src="assets/doors/door-1.avif" alt="Custom entry door" loading="lazy">
+                        </div>
+                        <div class="portfolio-item__overlay">
+                            <span class="portfolio-item__category">Doors & Frames</span>
+                            <h3 class="portfolio-item__title">Mahogany Entry Door</h3>
+                            <p class="portfolio-item__location">Naguru Villa</p>
+                        </div>
+                    </a>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-3.avif" alt="Dining room set">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Eight-Seater Dining Set</h3>
+                            <p class="portfolio-item__meta">Private Commission • Furniture</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-4.avif" alt="Restaurant interior">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Restaurant Fit-Out</h3>
+                            <p class="portfolio-item__meta">Kampala Restaurant • Hospitality</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/doors/door-2.avif" alt="Interior doors">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Interior Door Suite</h3>
+                            <p class="portfolio-item__meta">Bugolobi Apartment • Doors</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item portfolio-item--large">
+                        <img src="assets/workshop/workshop-3.avif" alt="Workshop craftsmanship">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Hotel Reception Desk</h3>
+                            <p class="portfolio-item__meta">Boutique Hotel • Hospitality</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-5.avif" alt="Executive desk">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Executive Office Suite</h3>
+                            <p class="portfolio-item__meta">Corporate Client • Furniture</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-6.avif" alt="Kitchen cabinetry">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Traditional Kitchen</h3>
+                            <p class="portfolio-item__meta">Entebbe Home • Kitchen Systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/doors/door-3.avif" alt="Custom door">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Carved Panel Door</h3>
+                            <p class="portfolio-item__meta">Heritage Home • Doors</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-7.avif" alt="Wardrobe system">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Master Bedroom Wardrobe</h3>
+                            <p class="portfolio-item__meta">Lubowa Villa • Wardrobes</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/workshop/workshop-4.avif" alt="Custom furniture">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Living Room Console</h3>
+                            <p class="portfolio-item__meta">Private Commission • Furniture</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/details/detail-1.avif" alt="Detail work">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Bar Counter Installation</h3>
+                            <p class="portfolio-item__meta">Airbnb Property • Hospitality</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/details/detail-2.avif" alt="Furniture detail">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Custom Shelving Unit</h3>
+                            <p class="portfolio-item__meta">Home Library • Furniture</p>
+                        </div>
+                    </div>
+                    
+                    <div class="portfolio-item">
+                        <img src="assets/furniture/furniture-8.avif" alt="Kitchen detail">
+                        <div class="portfolio-item__overlay">
+                            <h3 class="portfolio-item__title">Kitchen Island</h3>
+                            <p class="portfolio-item__meta">Modern Home • Kitchen Systems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- CTA Section -->
+        <section class="section cta-section">
+            <div class="container text-center">
+                <h2 class="cta-section__title">Let's Create Something Beautiful</h2>
+                <p class="cta-section__text">
+                    Every project starts with a conversation. Tell us about your vision.
+                </p>
+                <div class="hero__actions" style="justify-content: center;">
+                    <a href="contact.html" class="btn btn--primary btn--lg">Start Your Project</a>
+                    <a href="products.html" class="btn btn--white btn--lg">Explore Products</a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="index.html" class="footer__logo">
+                        <img src="assets/logo.png" alt="BaoMbao Craft" class="footer__logo-img">
+                    </a>
+                    <p class="footer__tagline">Transforming Wood Into Beautiful Living</p>
+                    <p class="footer__desc">
+                        A modern African design-manufacturing company crafting kitchens, wardrobes, doors, furniture, and complete interior systems.
+                    </p>
+                </div>
+                
+                <nav class="footer__nav">
+                    <h4 class="footer__nav-title">Products</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="products.html#kitchens">Kitchen Systems</a></li>
+                        <li><a href="products.html#wardrobes">Wardrobe Systems</a></li>
+                        <li><a href="products.html#doors">Doors & Frames</a></li>
+                        <li><a href="products.html#furniture">Furniture</a></li>
+                        <li><a href="products.html#hospitality">Hospitality</a></li>
+                    </ul>
+                </nav>
+                
+                <nav class="footer__nav">
+                    <h4 class="footer__nav-title">Company</h4>
+                    <ul class="footer__nav-list">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="materials.html">Materials</a></li>
+                        <li><a href="journal.html">Journal</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Contact</h4>
+                    <ul class="footer__nav-list">
+                        <li>Banda Kyambogo Road</li>
+                        <li>Opp. Banda Martyrs Church</li>
+                        <li>Kampala, Uganda</li>
+                        <li style="margin-top: var(--space-md);"><a href="tel:+256776410899">+256 776 410899</a></li>
+                        <li><a href="mailto:BaombaoCraft@gmail.com">BaombaoCraft@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <p>&copy; 2026 BaoMbao Craft. All rights reserved.</p>
+                <div class="footer__legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/256776410899" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    
+    <script src="js/main.js"></script>
+</body>
+</html>

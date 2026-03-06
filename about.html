@@ -3,820 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Primary Meta Tags -->
-    <title>About Us | BaoMbao Craft - Master Woodworkers in Uganda</title>
-    <meta name="title" content="About Us | BaoMbao Craft - Master Woodworkers in Uganda">
-    <meta name="description" content="Discover BaoMbao Craft's story - transforming locally sourced Ugandan wood into beautiful furniture, décor, and crafted details. Contemporary minimalism meets African heritage. Visit us at Banda Kyambogo Road, Kampala.">
-    <meta name="keywords" content="about BaoMbao Craft, Ugandan woodworkers, furniture makers Kampala, Musambya furniture, Mugavu wood, Mahogany furniture Uganda, Japandi furniture Africa, minimalist design Uganda">
+    <meta name="description" content="About BaoMbao Craft - Our story, mission, values, and team. Premium African woodcraft manufacturing in Kampala, Uganda.">
+    <meta name="keywords" content="BaoMbao Craft, about us, woodcraft company, Uganda craftsmen, Kampala furniture makers">
+    <meta name="author" content="BaoMbao Craft">
     <meta name="robots" content="index, follow">
+    <title>About | BaoMbao Craft</title>
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://baombaocraft.com/about">
-    <meta property="og:title" content="About Us | BaoMbao Craft - Master Woodworkers">
-    <meta property="og:description" content="Meet the craftsmen behind Uganda's premier woodworking studio. 25+ years of artisanal excellence.">
-    <meta property="og:image" content="https://baombaocraft.com/assets/workshop/workshop-1.avif">
-    <meta property="og:site_name" content="BaoMbao Craft">
+    <meta property="og:url" content="https://baombao.com/about.html">
+    <meta property="og:title" content="About | BaoMbao Craft">
+    <meta property="og:description" content="Our story, mission, values, and team. Premium African woodcraft manufacturing in Kampala, Uganda.">
+    <meta property="og:image" content="https://baombao.com/assets/workshop/workshop-1.avif">
+    <meta property="og:locale" content="en_UG">
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://baombaocraft.com/about">
-    <meta property="twitter:title" content="About Us | BaoMbao Craft - Master Woodworkers">
-    <meta property="twitter:description" content="Meet the craftsmen behind Uganda's premier woodworking studio.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="About | BaoMbao Craft">
+    <meta name="twitter:description" content="Our story, mission, values, and team. Premium African woodcraft manufacturing in Kampala.">
+    <meta name="twitter:image" content="https://baombao.com/assets/workshop/workshop-1.avif">
     
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://baombaocraft.com/about">
+    <!-- Canonical -->
+    <link rel="canonical" href="https://baombao.com/about.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#343434">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/images.css">
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon.svg">
-    
-    <noscript>
-        <style>
-            .animate-on-scroll { opacity: 1 !important; transform: none !important; }
-            .cursor { display: none !important; }
-        </style>
-    </noscript>
-    
-    <style>
-        /* About Page Specific Styles */
-        .about-hero {
-            position: relative;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            background: var(--cream);
-        }
-        
-        .about-hero__bg {
-            position: absolute;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            width: 50%;
-            background: linear-gradient(145deg, var(--mahogany) 0%, var(--teak) 100%);
-        }
-        
-        @media (max-width: 1023px) {
-            .about-hero__bg {
-                width: 100%;
-                opacity: 0.15;
-            }
-        }
-        
-        .about-hero__content {
-            position: relative;
-            z-index: 1;
-            max-width: 600px;
-            padding-top: var(--header-height);
-        }
-        
-        .about-hero__title {
-            font-size: var(--fs-h1);
-            margin-bottom: var(--space-lg);
-        }
-        
-        .about-hero__subtitle {
-            font-size: var(--fs-body-lg);
-            color: var(--charcoal-light);
-            margin-bottom: var(--space-xl);
-        }
-        
-        /* Origin Section */
-        .origin {
-            background: var(--cream-dark);
-        }
-        
-        .origin__grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: var(--space-3xl);
-            align-items: center;
-        }
-        
-        @media (min-width: 1024px) {
-            .origin__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .origin__image {
-            aspect-ratio: 4/5;
-            background: linear-gradient(145deg, var(--walnut) 0%, var(--mahogany) 100%);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .origin__quote {
-            font-family: var(--font-heading);
-            font-size: var(--fs-h4);
-            font-style: italic;
-            color: var(--gold);
-            border-left: 3px solid var(--gold);
-            padding-left: var(--space-lg);
-            margin: var(--space-xl) 0;
-        }
-        
-        /* Timeline Section */
-        .timeline {
-            position: relative;
-            padding: var(--section-padding) 0;
-        }
-        
-        .timeline__container {
-            max-width: 900px;
-            margin-inline: auto;
-        }
-        
-        .timeline__line {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--gold-soft);
-            transform: translateX(-50%);
-        }
-        
-        @media (max-width: 767px) {
-            .timeline__line {
-                left: 20px;
-            }
-        }
-        
-        .timeline__item {
-            position: relative;
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: var(--space-3xl);
-        }
-        
-        .timeline__item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .timeline__year {
-            flex: 0 0 50%;
-            text-align: right;
-            padding-right: var(--space-2xl);
-        }
-        
-        .timeline__year-text {
-            font-family: var(--font-heading);
-            font-size: var(--fs-h2);
-            color: var(--gold);
-        }
-        
-        .timeline__dot {
-            position: absolute;
-            left: 50%;
-            top: 0;
-            width: 20px;
-            height: 20px;
-            background: var(--gold);
-            border: 4px solid var(--cream);
-            border-radius: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-        }
-        
-        .timeline__content {
-            flex: 0 0 50%;
-            padding-left: var(--space-2xl);
-        }
-        
-        .timeline__title {
-            font-size: var(--fs-h4);
-            margin-bottom: var(--space-sm);
-        }
-        
-        .timeline__description {
-            color: var(--charcoal-light);
-        }
-        
-        @media (max-width: 767px) {
-            .timeline__item {
-                flex-direction: column;
-                padding-left: var(--space-3xl);
-            }
-            
-            .timeline__year {
-                flex: none;
-                text-align: left;
-                padding-right: 0;
-                margin-bottom: var(--space-sm);
-            }
-            
-            .timeline__dot {
-                left: 20px;
-                top: 5px;
-            }
-            
-            .timeline__content {
-                flex: none;
-                padding-left: 0;
-            }
-        }
-        
-        /* Team Section */
-        .team__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-        
-        .team-card {
-            text-align: center;
-        }
-        
-        .team-card__image {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto var(--space-lg);
-            border-radius: 50%;
-            background: linear-gradient(145deg, var(--mahogany) 0%, var(--walnut) 100%);
-            border: 4px solid var(--gold-soft);
-        }
-        
-        .team-card__name {
-            font-size: var(--fs-h4);
-            margin-bottom: var(--space-2xs);
-        }
-        
-        .team-card__role {
-            font-family: var(--font-accent);
-            font-style: italic;
-            color: var(--gold);
-            margin-bottom: var(--space-md);
-        }
-        
-        .team-card__bio {
-            font-size: var(--fs-small);
-            color: var(--charcoal-light);
-        }
-        
-        /* Values Section */
-        .values {
-            background: var(--dark-charcoal);
-            color: var(--cream);
-        }
-        
-        .values__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-xl);
-        }
-        
-        .value-card {
-            text-align: center;
-            padding: var(--space-xl);
-        }
-        
-        .value-card__icon {
-            width: 64px;
-            height: 64px;
-            margin: 0 auto var(--space-lg);
-        }
-        
-        .value-card__icon svg {
-            width: 100%;
-            height: 100%;
-            stroke: var(--gold);
-            fill: none;
-            stroke-width: 1.5;
-        }
-        
-        .value-card__title {
-            font-size: var(--fs-h4);
-            color: var(--cream);
-            margin-bottom: var(--space-sm);
-        }
-        
-        .value-card__description {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: var(--fs-small);
-        }
-        
-        /* Workshop Section */
-        .workshop__video {
-            position: relative;
-            aspect-ratio: 16/9;
-            background: var(--mahogany);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-top: var(--space-xl);
-        }
-        
-        .workshop__video-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0, 0, 0, 0.4);
-            cursor: pointer;
-            transition: background var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .workshop__video-overlay:hover {
-            background: rgba(0, 0, 0, 0.3);
-        }
-        
-        .workshop__play-btn {
-            width: 80px;
-            height: 80px;
-            background: var(--gold);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: transform var(--duration-fast) var(--ease-smooth),
-                        box-shadow var(--duration-fast) var(--ease-smooth);
-        }
-        
-        .workshop__play-btn:hover {
-            transform: scale(1.1);
-            box-shadow: var(--shadow-glow);
-        }
-        
-        .workshop__play-btn svg {
-            width: 32px;
-            height: 32px;
-            fill: var(--charcoal);
-            margin-left: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/design-system.css">
+    <link rel="stylesheet" href="css/pages.css">
 </head>
 <body>
-    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="visually-hidden">Skip to main content</a>
     
-    <div class="cursor" aria-hidden="true">
-        <div class="cursor-dot"></div>
-        <div class="cursor-outline"></div>
-    </div>
-
-    <!-- Navigation -->
-    <header class="header" id="header">
-        <nav class="nav container" role="navigation" aria-label="Main navigation">
-            <a href="/" class="nav__logo" aria-label="BaoMbao Craft Home">
+    <!-- Header -->
+    <header class="header header--solid" id="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav__logo">
                 <img src="assets/logo.png" alt="BaoMbao Craft" class="nav__logo-img">
             </a>
             
             <ul class="nav__menu" id="nav-menu">
-                <li class="nav__item">
-                    <a href="index.html#showroom" class="nav__link">Showroom</a>
-                </li>
-                <li class="nav__item">
-                    <a href="gallery.html" class="nav__link">Gallery</a>
-                </li>
-                <li class="nav__item">
-                    <a href="about.html" class="nav__link">Our Story</a>
-                </li>
-                <li class="nav__item">
-                    <a href="index.html#contact" class="nav__link nav__link--cta">Book Consultation</a>
-                </li>
+                <li><a href="products.html" class="nav__link">Products</a></li>
+                <li><a href="portfolio.html" class="nav__link">Portfolio</a></li>
+                <li><a href="materials.html" class="nav__link">Materials</a></li>
+                <li><a href="about.html" class="nav__link nav__link--active">About</a></li>
+                <li><a href="journal.html" class="nav__link">Journal</a></li>
+                <li><a href="contact.html" class="nav__link nav__link--cta">Get Quote</a></li>
             </ul>
             
-            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu">
                 <span class="nav__toggle-line"></span>
                 <span class="nav__toggle-line"></span>
                 <span class="nav__toggle-line"></span>
             </button>
         </nav>
     </header>
-
+    
     <main id="main-content">
-        <!-- About Hero -->
-        <section class="about-hero" aria-labelledby="about-hero-heading">
-            <div class="about-hero__bg parallax-layer" data-speed="0.3" aria-hidden="true"></div>
+        <!-- Page Hero -->
+        <section class="page-hero page-hero--with-bg">
+            <div class="page-hero__bg">
+                <img src="assets/workshop/workshop-5.avif" alt="BaoMbao workshop team">
+            </div>
+            <div class="container page-hero__content">
+                <p class="page-hero__tagline">Our Story</p>
+                <h1 class="page-hero__title">About BaoMbao</h1>
+                <p class="page-hero__text">
+                    A modern African design-manufacturing company that converts timber into complete living systems through craft, system, and a commitment to excellence.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Brand Story -->
+        <section class="section bg-white">
             <div class="container">
-                <div class="about-hero__content">
-                    <span class="section__label animate-fade-up">Our Story</span>
-                    <h1 class="about-hero__title animate-fade-up" id="about-hero-heading" data-delay="200">
-                        Where Wood Meets Soul
-                    </h1>
-                    <p class="about-hero__subtitle animate-fade-up" data-delay="400">
-                        BaoMbao Craft transforms locally sourced Ugandan wood into 
-                        functional and beautiful living pieces. This is our story 
-                        of design-driven manufacturing with an African perspective.
+                <div class="about-story">
+                    <div class="about-story__image">
+                        <img src="assets/workshop/workshop-6.avif" alt="BaoMbao workshop">
+                    </div>
+                    <div class="about-story__content">
+                        <h2>Craft with System</h2>
+                        <p>
+                            BaoMbao was founded with a simple belief: that African woodcraft could compete with the best in the world if we combined traditional craftsmanship with modern manufacturing systems.
+                        </p>
+                        <p>
+                            Our name, "BaoMbao" (meaning "wood" in Swahili), reflects our deep connection to the material we work with every day. We see wood not just as raw material, but as the foundation for creating beautiful living environments.
+                        </p>
+                        <p>
+                            Today, from our workshop on Banda Kyambogo Road, we serve homeowners, hospitality operators, developers, and design professionals across Uganda and beyond. Every piece that leaves our workshop carries our commitment to quality, beauty, and reliable delivery.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Mission & Vision -->
+        <section class="section bg-cream">
+            <div class="container">
+                <div class="grid grid-2 gap-xl">
+                    <div>
+                        <p class="section-header__tagline mb-md">Our Mission</p>
+                        <h2 class="mb-lg">Transforming Wood Into Beautiful Living</h2>
+                        <p class="text-lg" style="color: var(--gray-500); line-height: var(--lh-loose);">
+                            We create complete living systems — kitchens, wardrobes, doors, furniture, and modular interior packages — that combine the warmth and authenticity of African woodcraft with the reliability and efficiency of structured business systems.
+                        </p>
+                    </div>
+                    <div>
+                        <p class="section-header__tagline mb-md">Our Vision</p>
+                        <h2 class="mb-lg">African Design Excellence</h2>
+                        <p class="text-lg" style="color: var(--gray-500); line-height: var(--lh-loose);">
+                            We envision a future where African design-manufacturing companies are recognized globally for their excellence. Where locally-sourced materials, skilled craftspeople, and systematic operations deliver world-class interior solutions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Values -->
+        <section class="section bg-white">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-header__tagline">What Guides Us</p>
+                    <h2 class="section-header__title">Our Values</h2>
+                </div>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                        </div>
+                        <h3 class="value-card__title">Craft Excellence</h3>
+                        <p class="value-card__text">Every piece we create reflects our commitment to mastering the fundamentals of woodworking. We believe that excellence is found in the details.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        </div>
+                        <h3 class="value-card__title">Reliability</h3>
+                        <p class="value-card__text">We keep our promises. Our systems ensure consistent quality, accurate timelines, and clear communication throughout every project.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <h3 class="value-card__title">Material Honesty</h3>
+                        <p class="value-card__text">We celebrate the natural beauty of wood. Our designs let materials express their authentic character rather than hiding behind unnecessary decoration.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <div class="value-card__icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                        <h3 class="value-card__title">Client Partnership</h3>
+                        <p class="value-card__text">We see ourselves as partners in our clients' vision, not just vendors. Every project is a collaboration toward creating something meaningful.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Workshop -->
+        <section class="section bg-charcoal">
+            <div class="container">
+                <div class="about-story" style="color: var(--white);">
+                    <div class="about-story__content">
+                        <p class="section-header__tagline" style="color: var(--amber);">Where It Happens</p>
+                        <h2 style="color: var(--white);">Our Workshop</h2>
+                        <p style="color: var(--gray-400);">
+                            Located on Banda Kyambogo Road, opposite Banda Martyrs Church, our workshop is where raw timber becomes beautiful living spaces. 
+                        </p>
+                        <p style="color: var(--gray-400);">
+                            The workshop houses our design station, cutting and shaping area, assembly floor, and finishing room. Modern machinery works alongside traditional hand tools, allowing us to achieve both precision and artistry.
+                        </p>
+                        <p style="color: var(--gray-400);">
+                            We welcome clients to visit and see our work in progress. There's something powerful about watching your kitchen take shape on the workshop floor.
+                        </p>
+                        <div class="mt-xl">
+                            <a href="contact.html" class="btn btn--primary">Schedule a Visit</a>
+                        </div>
+                    </div>
+                    <div class="about-story__image">
+                        <img src="assets/workshop/workshop-7.avif" alt="BaoMbao workshop interior">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team -->
+        <section class="section bg-cream">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-header__tagline">The People</p>
+                    <h2 class="section-header__title">Our Team</h2>
+                    <p class="section-header__text">
+                        Behind every BaoMbao piece is a team of skilled craftspeople, designers, and project managers committed to excellence.
                     </p>
                 </div>
-            </div>
-        </section>
-
-        <!-- Origin Story -->
-        <section class="origin section" id="origin" aria-labelledby="origin-heading">
-            <div class="container">
-                <div class="origin__grid">
-                    <!-- Origin image: Shows the founder/workshop, establishing the brand story -->
-                    <div class="origin__image animate-on-scroll">
-                        <picture>
-                            <source srcset="assets/workshop/workshop-1.avif" type="image/avif">
-                            <img src="assets/workshop/workshop-1.avif" 
-                                 alt="Samuel Bbosa, founder of BaoMbao Craft, at his workbench demonstrating master joinery techniques" 
-                                 loading="lazy">
-                        </picture>
-                    </div>
-                    <div class="origin__content">
-                        <span class="section__label animate-on-scroll">The Beginning</span>
-                        <h2 class="section__title animate-on-scroll" id="origin-heading">
-                            Crafted From Local Wood
-                        </h2>
-                        <p class="animate-on-scroll">
-                            BaoMbao Craft was born from a vision to celebrate Ugandan timber — 
-                            Musambya, Mugavu, and Mahogany — transforming them into pieces that 
-                            honor both modern design and African heritage. We blend minimalist, 
-                            mid-century, and Japandi styles with local craftsmanship.
-                        </p>
-                        <blockquote class="origin__quote animate-on-scroll">
-                            "Every grain tells a story. Designed in Uganda, loved everywhere. 
-                            Built with purpose."
-                        </blockquote>
-                        <p class="animate-on-scroll">
-                            The name "BaoMbao" celebrates our foundation — the plank, the 
-                            fundamental building block of every creation. Today we serve 
-                            homeowners, real estate developers, and hospitality businesses 
-                            across Uganda with design-driven manufacturing.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Timeline -->
-        <section class="timeline section" id="timeline" aria-labelledby="timeline-heading">
-            <div class="container">
-                <header class="section__header">
-                    <span class="section__label animate-on-scroll">Our Journey</span>
-                    <h2 class="section__title animate-on-scroll" id="timeline-heading">
-                        Milestones in Craftsmanship
-                    </h2>
-                </header>
                 
-                <div class="timeline__container">
-                    <div class="timeline__line" aria-hidden="true"></div>
-                    
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__year">
-                            <span class="timeline__year-text">2020</span>
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="team-card__image">
+                            <img src="assets/gallery/extra-1.avif" alt="Team member">
                         </div>
-                        <div class="timeline__dot" aria-hidden="true"></div>
-                        <div class="timeline__content">
-                            <h3 class="timeline__title">Workshop Foundation</h3>
-                            <p class="timeline__description">
-                                BaoMbao Craft established at Banda Kyambogo Road, 
-                                with focus on local timber and modern design principles.
-                            </p>
-                        </div>
+                        <h3 class="team-card__name">John Mukanza</h3>
+                        <p class="team-card__role">Founder & Lead Designer</p>
                     </div>
                     
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__year">
-                            <span class="timeline__year-text">2022</span>
+                    <div class="team-card">
+                        <div class="team-card__image">
+                            <img src="assets/gallery/extra-2.avif" alt="Team member">
                         </div>
-                        <div class="timeline__dot" aria-hidden="true"></div>
-                        <div class="timeline__content">
-                            <h3 class="timeline__title">CNC Capabilities Added</h3>
-                            <p class="timeline__description">
-                                Integrated modern CNC and laser craft technology while 
-                                maintaining hand-finish quality and attention to detail.
-                            </p>
-                        </div>
+                        <h3 class="team-card__name">Sarah Nakamya</h3>
+                        <p class="team-card__role">Project Manager</p>
                     </div>
                     
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__year">
-                            <span class="timeline__year-text">2024</span>
+                    <div class="team-card">
+                        <div class="team-card__image">
+                            <img src="assets/gallery/extra-3.avif" alt="Team member">
                         </div>
-                        <div class="timeline__dot" aria-hidden="true"></div>
-                        <div class="timeline__content">
-                            <h3 class="timeline__title">Expanded Collections</h3>
-                            <p class="timeline__description">
-                                Launched comprehensive furniture catalogue including seating, 
-                                tables, storage, bedroom, office, and outdoor collections.
-                            </p>
-                        </div>
+                        <h3 class="team-card__name">Peter Ochieng</h3>
+                        <p class="team-card__role">Master Craftsman</p>
                     </div>
                     
-                    <div class="timeline__item animate-on-scroll">
-                        <div class="timeline__year">
-                            <span class="timeline__year-text">2026</span>
+                    <div class="team-card">
+                        <div class="team-card__image">
+                            <img src="assets/gallery/extra-4.avif" alt="Team member">
                         </div>
-                        <div class="timeline__dot" aria-hidden="true"></div>
-                        <div class="timeline__content">
-                            <h3 class="timeline__title">Today & Beyond</h3>
-                            <p class="timeline__description">
-                                Serving homeowners, real estate developers, and hospitality 
-                                businesses with design-driven, precision-built furniture.
-                            </p>
-                        </div>
+                        <h3 class="team-card__name">Grace Auma</h3>
+                        <p class="team-card__role">Finishing Specialist</p>
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Values Section -->
-        <section class="values section" id="values" aria-labelledby="values-heading">
-            <div class="container">
-                <header class="section__header">
-                    <span class="section__label animate-on-scroll">Our Philosophy</span>
-                    <h2 class="section__title animate-on-scroll" id="values-heading">
-                        What Guides Our Craft
-                    </h2>
-                </header>
-                
-                <div class="values__grid">
-                    <div class="value-card animate-on-scroll">
-                        <div class="value-card__icon">
-                            <svg viewBox="0 0 64 64">
-                                <circle cx="32" cy="32" r="28" fill="none"/>
-                                <path d="M22 32 L28 38 L42 24"/>
-                            </svg>
-                        </div>
-                        <h3 class="value-card__title">Crafted From Local Wood</h3>
-                        <p class="value-card__description">
-                            Musambya, Mugavu, and Mahogany — we source quality dry timbers 
-                            locally and transform them into lasting pieces.
-                        </p>
-                    </div>
-                    
-                    <div class="value-card animate-on-scroll">
-                        <div class="value-card__icon">
-                            <svg viewBox="0 0 64 64">
-                                <path d="M32 8 L32 56"/>
-                                <path d="M16 24 C16 16 24 8 32 8 C40 8 48 16 48 24"/>
-                                <path d="M20 40 C20 48 26 56 32 56 C38 56 44 48 44 40"/>
-                            </svg>
-                        </div>
-                        <h3 class="value-card__title">Modern African Living</h3>
-                        <p class="value-card__description">
-                            Contemporary minimalism meets African heritage. We blend 
-                            Japandi aesthetics with local craftsmanship.
-                        </p>
-                    </div>
-                    
-                    <div class="value-card animate-on-scroll">
-                        <div class="value-card__icon">
-                            <svg viewBox="0 0 64 64">
-                                <circle cx="32" cy="20" r="12"/>
-                                <path d="M16 56 C16 44 23 36 32 36 C41 36 48 44 48 56"/>
-                                <circle cx="52" cy="28" r="8"/>
-                                <path d="M44 56 C44 48 47 44 52 44"/>
-                            </svg>
-                        </div>
-                        <h3 class="value-card__title">Built With Precision</h3>
-                        <p class="value-card__description">
-                            Best-in-class workshop and machines. Skilled carpentry 
-                            combined with CNC technology for consistent quality.
-                        </p>
-                    </div>
-                    
-                    <div class="value-card animate-on-scroll">
-                        <div class="value-card__icon">
-                            <svg viewBox="0 0 64 64">
-                                <path d="M32 8 L40 24 L56 26 L44 38 L47 54 L32 46 L17 54 L20 38 L8 26 L24 24 Z"/>
-                            </svg>
-                        </div>
-                        <h3 class="value-card__title">Delivered Faster</h3>
-                        <p class="value-card__description">
-                            Fast turnaround times with reliable delivery. 
-                            Original designs at medium price with premium feel.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Meet the Team -->
-        <section class="team section" id="team" aria-labelledby="team-heading">
-            <div class="container">
-                <header class="section__header">
-                    <span class="section__label animate-on-scroll">Our Artisans</span>
-                    <h2 class="section__title animate-on-scroll" id="team-heading">
-                        The Hands Behind the Craft
-                    </h2>
-                </header>
-                
-                <div class="team__grid">
-                    <!-- Team member 1: Founder - uses workshop image as portrait placeholder -->
-                    <div class="team-card animate-on-scroll">
-                        <div class="team-card__image">
-                            <picture>
-                                <source srcset="assets/workshop/workshop-2.avif" type="image/avif">
-                                <img src="assets/workshop/workshop-2.avif" 
-                                     alt="Samuel Bbosa - Founder and Master Craftsman at BaoMbao Craft" 
-                                     loading="lazy">
-                            </picture>
-                        </div>
-                        <h3 class="team-card__name">Samuel Bbosa</h3>
-                        <p class="team-card__role">Founder & Master Craftsman</p>
-                        <p class="team-card__bio">
-                            Trained in Kyoto's finest workshops. 15+ years experience. 
-                            Specializes in precision joinery and complex assemblies.
-                        </p>
-                    </div>
-                    
-                    <!-- Team member 2: Design Director -->
-                    <div class="team-card animate-on-scroll">
-                        <div class="team-card__image">
-                            <picture>
-                                <source srcset="assets/workshop/workshop-3.avif" type="image/avif">
-                                <img src="assets/workshop/workshop-3.avif" 
-                                     alt="Grace Namukasa - Design Director at BaoMbao Craft" 
-                                     loading="lazy">
-                            </picture>
-                        </div>
-                        <h3 class="team-card__name">Grace Namukasa</h3>
-                        <p class="team-card__role">Design Director</p>
-                        <p class="team-card__bio">
-                            Interior architecture background. Bridges client visions 
-                            with craftsman capabilities. 3D modeling expert.
-                        </p>
-                    </div>
-                    
-                    <!-- Team member 3: Hardware Lead -->
-                    <div class="team-card animate-on-scroll">
-                        <div class="team-card__image">
-                            <picture>
-                                <source srcset="assets/workshop/workshop-4.avif" type="image/avif">
-                                <img src="assets/workshop/workshop-4.avif" 
-                                     alt="Joseph Ochieng - Hardware Specialist at BaoMbao Craft" 
-                                     loading="lazy">
-                            </picture>
-                        </div>
-                        <h3 class="team-card__name">Joseph Ochieng</h3>
-                        <p class="team-card__role">Hardware Specialist</p>
-                        <p class="team-card__bio">
-                            Expert in premium hardware selection and installation. Ensures every 
-                            piece functions as beautifully as it looks.
-                        </p>
-                    </div>
-                    
-                    <!-- Team member 4: Master Carver -->
-                    <div class="team-card animate-on-scroll">
-                        <div class="team-card__image">
-                            <picture>
-                                <source srcset="assets/workshop/workshop-5.avif" type="image/avif">
-                                <img src="assets/workshop/workshop-5.avif" 
-                                     alt="Martha Akello - Master Carver at BaoMbao Craft" 
-                                     loading="lazy">
-                            </picture>
-                        </div>
-                        <h3 class="team-card__name">Martha Akello</h3>
-                        <p class="team-card__role">Master Carver</p>
-                        <p class="team-card__bio">
-                            20 years carving intricate designs. Specializes in 
-                            traditional Ugandan motifs and patterns.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Workshop Video -->
-        <section class="workshop section section--cream" id="workshop" aria-labelledby="workshop-heading">
-            <div class="container">
-                <header class="section__header">
-                    <span class="section__label animate-on-scroll">Behind the Scenes</span>
-                    <h2 class="section__title animate-on-scroll" id="workshop-heading">
-                        Inside Our Workshop
-                    </h2>
-                    <p class="section__description animate-on-scroll">
-                        Watch our artisans transform raw timber into works of art. 
-                        Every piece begins here.
-                    </p>
-                </header>
-                
-                <!-- Workshop video poster shows craftsmanship in action -->
-                <div class="workshop__video animate-on-scroll">
-                    <picture>
-                        <source srcset="assets/workshop/workshop-6.avif" type="image/avif">
-                        <img src="assets/workshop/workshop-6.avif" 
-                             alt="BaoMbao Craft workshop interior - artisans crafting premium woodwork" 
-                             loading="lazy" 
-                             style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
-                    </picture>
-                    <div class="workshop__video-overlay">
-                        <button class="workshop__play-btn" aria-label="Play video">
-                            <svg viewBox="0 0 24 24">
-                                <polygon points="5,3 19,12 5,21"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta section" aria-labelledby="about-cta-heading">
-            <div class="cta__bg">
-                <div class="cta__bg-layer cta__bg-layer--1 parallax-layer" data-speed="0.2" aria-hidden="true"></div>
-                <div class="cta__bg-layer cta__bg-layer--2 parallax-layer" data-speed="0.4" aria-hidden="true"></div>
-            </div>
-            <div class="container">
-                <div class="cta__content">
-                    <h2 class="cta__title animate-on-scroll" id="about-cta-heading">
-                        Ready to Create Something Extraordinary?
-                    </h2>
-                    <p class="cta__description animate-on-scroll">
-                        Visit our workshop, meet our artisans, and see craftsmanship in action.
-                    </p>
-                    <div class="cta__buttons animate-on-scroll">
-                        <a href="index.html#contact" class="btn btn--primary btn--large">
-                            <span>Schedule a Visit</span>
-                            <svg class="btn__icon" viewBox="0 0 24 24" aria-hidden="true">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </a>
-                        <a href="gallery.html" class="btn btn--outline btn--light btn--large">
-                            <span>View Our Work</span>
-                        </a>
-                    </div>
+        
+        <!-- CTA -->
+        <section class="section cta-section">
+            <div class="container text-center">
+                <h2 class="cta-section__title">Let's Work Together</h2>
+                <p class="cta-section__text">
+                    Ready to transform your space? We'd love to hear about your project.
+                </p>
+                <div class="hero__actions" style="justify-content: center;">
+                    <a href="contact.html" class="btn btn--primary btn--lg">Get in Touch</a>
+                    <a href="portfolio.html" class="btn btn--white btn--lg">See Our Work</a>
                 </div>
             </div>
         </section>
     </main>
-
+    
     <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer__pattern" aria-hidden="true">
-            <svg class="footer__svg-pattern" viewBox="0 0 1440 100" preserveAspectRatio="none">
-                <path d="M0,50 C240,100 480,0 720,50 C960,100 1200,0 1440,50 L1440,100 L0,100 Z" fill="currentColor"/>
-            </svg>
-        </div>
+    <footer class="footer">
         <div class="container">
             <div class="footer__grid">
                 <div class="footer__brand">
-                    <a href="/" class="footer__logo" aria-label="BaoMbao Craft Home">
+                    <a href="index.html" class="footer__logo">
                         <img src="assets/logo.png" alt="BaoMbao Craft" class="footer__logo-img">
                     </a>
-                    <p class="footer__tagline">
-                        Transforming wood into beautiful living. 
-                        Designed in Uganda, loved everywhere.
+                    <p class="footer__tagline">Transforming Wood Into Beautiful Living</p>
+                    <p class="footer__desc">
+                        A modern African design-manufacturing company crafting kitchens, wardrobes, doors, furniture, and complete interior systems.
                     </p>
                 </div>
                 
-                <nav class="footer__nav" aria-label="Footer navigation">
-                    <h3 class="footer__nav-title">Explore</h3>
+                <nav class="footer__nav">
+                    <h4 class="footer__nav-title">Products</h4>
                     <ul class="footer__nav-list">
-                        <li><a href="index.html#showroom">Showroom</a></li>
-                        <li><a href="gallery.html">Gallery</a></li>
-                        <li><a href="about.html">Our Story</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
+                        <li><a href="products.html#kitchens">Kitchen Systems</a></li>
+                        <li><a href="products.html#wardrobes">Wardrobe Systems</a></li>
+                        <li><a href="products.html#doors">Doors & Frames</a></li>
+                        <li><a href="products.html#furniture">Furniture</a></li>
+                        <li><a href="products.html#hospitality">Hospitality</a></li>
                     </ul>
                 </nav>
                 
-                <nav class="footer__nav" aria-label="Services navigation">
-                    <h3 class="footer__nav-title">Services</h3>
+                <nav class="footer__nav">
+                    <h4 class="footer__nav-title">Company</h4>
                     <ul class="footer__nav-list">
-                        <li><a href="#">Woodcraft & Joinery</a></li>
-                        <li><a href="#">CNC & Laser Craft</a></li>
-                        <li><a href="#">Custom Design Projects</a></li>
-                        <li><a href="#">Finishing & Restoration</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="materials.html">Materials</a></li>
+                        <li><a href="journal.html">Journal</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
                 
-                <div class="footer__newsletter">
-                    <h3 class="footer__nav-title">Stay Inspired</h3>
-                    <p class="footer__newsletter-text">
-                        Wood care tips, new project reveals, and exclusive offers.
-                    </p>
-                    <form class="footer__newsletter-form" action="https://formsubmit.co/BaombaoCraft@gmail.com" method="POST">
-                        <label for="about-newsletter-email" class="visually-hidden">Email address</label>
-                        <input type="email" id="about-newsletter-email" name="email" placeholder="Enter your email" class="footer__newsletter-input" required>
-                        <button type="submit" class="footer__newsletter-btn" aria-label="Subscribe">
-                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                        </button>
-                    </form>
+                <div class="footer__nav">
+                    <h4 class="footer__nav-title">Contact</h4>
+                    <ul class="footer__nav-list">
+                        <li>Banda Kyambogo Road</li>
+                        <li>Opp. Banda Martyrs Church</li>
+                        <li>Kampala, Uganda</li>
+                        <li style="margin-top: var(--space-md);"><a href="tel:+256776410899">+256 776 410899</a></li>
+                        <li><a href="mailto:BaombaoCraft@gmail.com">BaombaoCraft@gmail.com</a></li>
+                    </ul>
                 </div>
             </div>
             
             <div class="footer__bottom">
-                <p class="footer__copyright">
-                    &copy; 2026 BaoMbao Craft. All rights reserved.
-                </p>
+                <p>&copy; 2026 BaoMbao Craft. All rights reserved.</p>
                 <div class="footer__legal">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span>•</span>
+                    <a href="terms.html">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
-
-    <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="js/parallax.js"></script>
+    
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/256776410899" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    
     <script src="js/main.js"></script>
 </body>
 </html>

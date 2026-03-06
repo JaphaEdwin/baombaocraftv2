@@ -1,0 +1,844 @@
+// BaoMbao Craft Database Schema
+// Prisma Schema for PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ========================================
+// USER & AUTHENTICATION
+// ========================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  phone         String?   @unique
+  passwordHash  String    @map("password_hash")
+  role          UserRole  @default(customer)
+  verified      Boolean   @default(false)
+  verifyToken   String?   @map("verify_token")
+  resetToken    String?   @map("reset_token")
+  resetExpires  DateTime? @map("reset_expires")
+  
+  // Profile
+  firstName     String?   @map("first_name")
+  lastName      String?   @map("last_name")
+  companyName   String?   @map("company_name")
+  address       String?
+  city          String?
+  country       String?   @default("Uganda")
+  
+  // Preferences
+  preferredContact  ContactMethod @default(whatsapp) @map("preferred_contact")
+  marketingConsent  Boolean       @default(false) @map("marketing_consent")
+  
+  // Timestamps
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  lastLoginAt   DateTime? @map("last_login_at")
+  
+  // Relations
+  quotationsReceived  Quotation[]     @relation("CustomerQuotations")
+  quotationsCreated   Quotation[]     @relation("CreatedByAdmin")
+  projects            Project[]
+  payments            Payment[]
+  inquiries           Inquiry[]
+  notifications       Notification[]
+  refreshTokens       RefreshToken[]
+  leadScore           LeadScore?
+  
+  @@map("users")
+}
+
+model RefreshToken {
+  id          String   @id @default(uuid())
+  token       String   @unique
+  userId      String   @map("user_id")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt   DateTime @map("expires_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+  
+  @@map("refresh_tokens")
+}
+
+enum UserRole {
+  customer
+  partner
+  admin
+  super_admin
+}
+
+enum ContactMethod {
+  email
+  phone
+  whatsapp
+}
+
+// ========================================
+// INQUIRIES & LEAD MANAGEMENT
+// ========================================
+
+model Inquiry {
+  id            String        @id @default(uuid())
+  customerId    String?       @map("customer_id")
+  customer      User?         @relation(fields: [customerId], references: [id])
+  
+  // Contact info (for non-registered users)
+  name          String
+  email         String
+  phone         String
+  
+  // Inquiry details
+  projectType   String        @map("project_type")
+  budget        String?
+  timeline      String?
+  message       String
+  
+  // Source tracking
+  source        InquirySource @default(website)
+  sourcePage    String?       @map("source_page")
+  utmSource     String?       @map("utm_source")
+  utmMedium     String?       @map("utm_medium")
+  utmCampaign   String?       @map("utm_campaign")
+  
+  // Status
+  status        InquiryStatus @default(new)
+  assignedTo    String?       @map("assigned_to")
+  respondedAt   DateTime?     @map("responded_at")
+  
+  // Timestamps
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  
+  // Relations
+  quotation     Quotation?
+  
+  @@map("inquiries")
+}
+
+enum InquirySource {
+  website
+  whatsapp
+  phone
+  referral
+  social
+  partner
+}
+
+enum InquiryStatus {
+  new
+  contacted
+  qualified
+  quoted
+  converted
+  lost
+}
+
+model LeadScore {
+  id            String    @id @default(uuid())
+  userId        String    @unique @map("user_id")
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  score         Int       @default(0)
+  engagement    Int       @default(0)
+  recency       Int       @default(0)
+  frequency     Int       @default(0)
+  monetary      Int       @default(0)
+  
+  lastActivity  DateTime? @map("last_activity")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  
+  @@map("lead_scores")
+}
+
+// ========================================
+// QUOTATIONS
+// ========================================
+
+model Quotation {
+  id              String          @id @default(uuid())
+  quoteNumber     String          @unique @map("quote_number")
+  
+  // Customer
+  customerId      String          @map("customer_id")
+  customer        User            @relation("CustomerQuotations", fields: [customerId], references: [id])
+  
+  // Created by admin
+  createdById     String          @map("created_by_id")
+  createdBy       User            @relation("CreatedByAdmin", fields: [createdById], references: [id])
+  
+  // Linked inquiry
+  inquiryId       String?         @unique @map("inquiry_id")
+  inquiry         Inquiry?        @relation(fields: [inquiryId], references: [id])
+  
+  // Quote details
+  title           String
+  description     String?
+  
+  // Pricing
+  subtotal        Decimal         @db.Decimal(12, 2)
+  taxRate         Decimal         @default(0) @map("tax_rate") @db.Decimal(5, 2)
+  taxAmount       Decimal         @default(0) @map("tax_amount") @db.Decimal(12, 2)
+  discount        Decimal         @default(0) @db.Decimal(12, 2)
+  total           Decimal         @db.Decimal(12, 2)
+  currency        String          @default("UGX")
+  
+  // Status
+  status          QuotationStatus @default(draft)
+  validUntil      DateTime?       @map("valid_until")
+  sentAt          DateTime?       @map("sent_at")
+  viewedAt        DateTime?       @map("viewed_at")
+  acceptedAt      DateTime?       @map("accepted_at")
+  rejectedAt      DateTime?       @map("rejected_at")
+  rejectionReason String?         @map("rejection_reason")
+  
+  // Versioning
+  version         Int             @default(1)
+  parentQuoteId   String?         @map("parent_quote_id")
+  
+  // Notes
+  internalNotes   String?         @map("internal_notes")
+  customerNotes   String?         @map("customer_notes")
+  termsConditions String?         @map("terms_conditions")
+  
+  // Timestamps
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  
+  // Relations
+  items           QuotationItem[]
+  project         Project?
+  
+  @@map("quotations")
+}
+
+model QuotationItem {
+  id            String      @id @default(uuid())
+  quotationId   String      @map("quotation_id")
+  quotation     Quotation   @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  
+  // Product reference
+  productId     String?     @map("product_id")
+  product       Product?    @relation(fields: [productId], references: [id])
+  
+  // Item details
+  name          String
+  description   String?
+  category      String
+  
+  // Specifications
+  specifications Json?      // { width, height, depth, material, finish, etc. }
+  
+  // Pricing
+  quantity      Int         @default(1)
+  unitPrice     Decimal     @map("unit_price") @db.Decimal(12, 2)
+  totalPrice    Decimal     @map("total_price") @db.Decimal(12, 2)
+  
+  // Costing (internal)
+  materialCost  Decimal?    @map("material_cost") @db.Decimal(12, 2)
+  laborCost     Decimal?    @map("labor_cost") @db.Decimal(12, 2)
+  margin        Decimal?    @db.Decimal(5, 2)
+  
+  // Order
+  sortOrder     Int         @default(0) @map("sort_order")
+  
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+  
+  @@map("quotation_items")
+}
+
+enum QuotationStatus {
+  draft
+  sent
+  viewed
+  accepted
+  rejected
+  expired
+  revised
+}
+
+// ========================================
+// PRODUCTS & TEMPLATES
+// ========================================
+
+model Product {
+  id            String          @id @default(uuid())
+  sku           String?         @unique
+  name          String
+  description   String?
+  category      ProductCategory
+  
+  // Pricing
+  basePrice     Decimal         @map("base_price") @db.Decimal(12, 2)
+  currency      String          @default("UGX")
+  
+  // Dimensions (default)
+  defaultWidth  Decimal?        @map("default_width") @db.Decimal(10, 2)
+  defaultHeight Decimal?        @map("default_height") @db.Decimal(10, 2)
+  defaultDepth  Decimal?        @map("default_depth") @db.Decimal(10, 2)
+  
+  // Options
+  materials     String[]        // Available materials
+  finishes      String[]        // Available finishes
+  addOns        Json?           // { name, price }[]
+  
+  // Images
+  images        String[]
+  
+  // Status
+  active        Boolean         @default(true)
+  
+  // Timestamps
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  
+  // Relations
+  quotationItems QuotationItem[]
+  
+  @@map("products")
+}
+
+enum ProductCategory {
+  kitchen
+  wardrobe
+  door
+  furniture
+  hospitality
+  other
+}
+
+// ========================================
+// PROJECTS
+// ========================================
+
+model Project {
+  id              String          @id @default(uuid())
+  projectNumber   String          @unique @map("project_number")
+  
+  // Customer
+  customerId      String          @map("customer_id")
+  customer        User            @relation(fields: [customerId], references: [id])
+  
+  // Quotation
+  quotationId     String          @unique @map("quotation_id")
+  quotation       Quotation       @relation(fields: [quotationId], references: [id])
+  
+  // Project details
+  name            String
+  description     String?
+  category        ProductCategory
+  
+  // Location
+  installAddress  String?         @map("install_address")
+  installCity     String?         @map("install_city")
+  
+  // Status
+  status          ProjectStatus   @default(pending)
+  
+  // Dates
+  startDate       DateTime?       @map("start_date")
+  targetDate      DateTime?       @map("target_date")
+  completedDate   DateTime?       @map("completed_date")
+  
+  // Team
+  assignedTeam    Json?           @map("assigned_team") // { role, userId }[]
+  
+  // Notes
+  internalNotes   String?         @map("internal_notes")
+  
+  // Timestamps
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  
+  // Relations
+  milestones      ProjectMilestone[]
+  payments        Payment[]
+  qaChecklists    QAChecklist[]
+  
+  @@map("projects")
+}
+
+model ProjectMilestone {
+  id            String          @id @default(uuid())
+  projectId     String          @map("project_id")
+  project       Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  name          String
+  description   String?
+  status        MilestoneStatus @default(pending)
+  
+  // Dates
+  dueDate       DateTime?       @map("due_date")
+  completedAt   DateTime?       @map("completed_at")
+  completedBy   String?         @map("completed_by")
+  
+  // Order
+  sortOrder     Int             @default(0) @map("sort_order")
+  
+  // Notes & attachments
+  notes         String?
+  attachments   String[]
+  
+  // Notification sent
+  notifiedAt    DateTime?       @map("notified_at")
+  
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  
+  @@map("project_milestones")
+}
+
+enum ProjectStatus {
+  pending
+  design
+  approved
+  production
+  qa
+  ready
+  delivery
+  installation
+  completed
+  cancelled
+}
+
+enum MilestoneStatus {
+  pending
+  in_progress
+  completed
+  skipped
+}
+
+// ========================================
+// PAYMENTS
+// ========================================
+
+model Payment {
+  id              String          @id @default(uuid())
+  paymentRef      String          @unique @map("payment_ref")
+  
+  // Linked records
+  projectId       String?         @map("project_id")
+  project         Project?        @relation(fields: [projectId], references: [id])
+  customerId      String          @map("customer_id")
+  customer        User            @relation(fields: [customerId], references: [id])
+  
+  // Amount
+  amount          Decimal         @db.Decimal(12, 2)
+  currency        String          @default("UGX")
+  
+  // Payment method
+  method          PaymentMethod
+  providerRef     String?         @map("provider_ref")
+  providerData    Json?           @map("provider_data")
+  
+  // Status
+  status          PaymentStatus   @default(pending)
+  
+  // Type
+  paymentType     PaymentType     @default(deposit) @map("payment_type")
+  
+  // Timestamps
+  initiatedAt     DateTime        @default(now()) @map("initiated_at")
+  completedAt     DateTime?       @map("completed_at")
+  failedAt        DateTime?       @map("failed_at")
+  failureReason   String?         @map("failure_reason")
+  
+  // Receipt
+  receiptUrl      String?         @map("receipt_url")
+  receiptSentAt   DateTime?       @map("receipt_sent_at")
+  
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  
+  @@map("payments")
+}
+
+enum PaymentMethod {
+  mtn_momo
+  airtel_money
+  card
+  bank_transfer
+  cash
+}
+
+enum PaymentStatus {
+  pending
+  processing
+  completed
+  failed
+  refunded
+  cancelled
+}
+
+enum PaymentType {
+  deposit
+  progress
+  final
+  full
+}
+
+// ========================================
+// INVENTORY
+// ========================================
+
+model Material {
+  id              String          @id @default(uuid())
+  sku             String          @unique
+  name            String
+  description     String?
+  category        MaterialCategory
+  
+  // Stock
+  unit            String          // sqm, piece, kg, meter
+  quantityOnHand  Decimal         @map("quantity_on_hand") @db.Decimal(10, 2)
+  reorderLevel    Decimal         @map("reorder_level") @db.Decimal(10, 2)
+  reorderQty      Decimal         @map("reorder_qty") @db.Decimal(10, 2)
+  
+  // Pricing
+  unitCost        Decimal         @map("unit_cost") @db.Decimal(10, 2)
+  currency        String          @default("UGX")
+  
+  // Supplier
+  supplierId      String?         @map("supplier_id")
+  supplier        Supplier?       @relation(fields: [supplierId], references: [id])
+  
+  // Status
+  active          Boolean         @default(true)
+  lowStockAlert   Boolean         @default(false) @map("low_stock_alert")
+  
+  // Timestamps
+  lastRestocked   DateTime?       @map("last_restocked")
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+  
+  // Relations
+  transactions    InventoryTransaction[]
+  
+  @@map("materials")
+}
+
+model Supplier {
+  id              String      @id @default(uuid())
+  name            String
+  contactPerson   String?     @map("contact_person")
+  email           String?
+  phone           String?
+  address         String?
+  
+  // Payment terms
+  paymentTerms    String?     @map("payment_terms")
+  leadTime        Int?        @map("lead_time") // days
+  
+  active          Boolean     @default(true)
+  
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+  
+  // Relations
+  materials       Material[]
+  
+  @@map("suppliers")
+}
+
+model InventoryTransaction {
+  id            String              @id @default(uuid())
+  materialId    String              @map("material_id")
+  material      Material            @relation(fields: [materialId], references: [id])
+  
+  type          TransactionType
+  quantity      Decimal             @db.Decimal(10, 2)
+  unitCost      Decimal?            @map("unit_cost") @db.Decimal(10, 2)
+  
+  // Reference
+  referenceType String?             @map("reference_type") // project, purchase, adjustment
+  referenceId   String?             @map("reference_id")
+  
+  notes         String?
+  performedBy   String?             @map("performed_by")
+  
+  createdAt     DateTime            @default(now()) @map("created_at")
+  
+  @@map("inventory_transactions")
+}
+
+enum MaterialCategory {
+  wood
+  hardware
+  finish
+  adhesive
+  glass
+  fabric
+  other
+}
+
+enum TransactionType {
+  purchase
+  usage
+  adjustment
+  return
+  waste
+}
+
+// ========================================
+// QA & CHECKLISTS
+// ========================================
+
+model QAChecklist {
+  id            String          @id @default(uuid())
+  projectId     String          @map("project_id")
+  project       Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  
+  templateName  String          @map("template_name")
+  stage         String          // production, pre-delivery, installation
+  
+  items         Json            // { item, passed, notes }[]
+  
+  status        QAStatus        @default(pending)
+  completedBy   String?         @map("completed_by")
+  completedAt   DateTime?       @map("completed_at")
+  
+  notes         String?
+  attachments   String[]
+  
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  
+  @@map("qa_checklists")
+}
+
+enum QAStatus {
+  pending
+  in_progress
+  passed
+  failed
+  needs_rework
+}
+
+// ========================================
+// CMS - CONTENT MANAGEMENT
+// ========================================
+
+model BlogPost {
+  id            String        @id @default(uuid())
+  slug          String        @unique
+  title         String
+  excerpt       String?
+  content       String
+  featuredImage String?       @map("featured_image")
+  
+  // Author
+  authorId      String        @map("author_id")
+  
+  // SEO
+  metaTitle     String?       @map("meta_title")
+  metaDesc      String?       @map("meta_desc")
+  
+  // Categorization
+  category      String?
+  tags          String[]
+  
+  // Status
+  status        ContentStatus @default(draft)
+  publishedAt   DateTime?     @map("published_at")
+  
+  // Stats
+  viewCount     Int           @default(0) @map("view_count")
+  
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  
+  @@map("blog_posts")
+}
+
+model Testimonial {
+  id            String        @id @default(uuid())
+  customerName  String        @map("customer_name")
+  customerTitle String?       @map("customer_title")
+  customerImage String?       @map("customer_image")
+  
+  content       String
+  rating        Int           @default(5)
+  
+  // Project reference
+  projectId     String?       @map("project_id")
+  projectType   String?       @map("project_type")
+  
+  // Status
+  status        ContentStatus @default(pending)
+  featured      Boolean       @default(false)
+  
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  
+  @@map("testimonials")
+}
+
+model CaseStudy {
+  id              String        @id @default(uuid())
+  slug            String        @unique
+  title           String
+  subtitle        String?
+  
+  // Content
+  challenge       String?
+  solution        String?
+  results         String?
+  fullContent     String?       @map("full_content")
+  
+  // Media
+  featuredImage   String?       @map("featured_image")
+  gallery         String[]
+  beforeAfter     Json?         @map("before_after") // { before, after }[]
+  
+  // Project details
+  projectType     String        @map("project_type")
+  location        String?
+  duration        String?
+  completedDate   DateTime?     @map("completed_date")
+  
+  // Stats
+  specs           Json?         // { label, value }[]
+  
+  // Status
+  status          ContentStatus @default(draft)
+  featured        Boolean       @default(false)
+  
+  // SEO
+  metaTitle       String?       @map("meta_title")
+  metaDesc        String?       @map("meta_desc")
+  
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+  
+  @@map("case_studies")
+}
+
+enum ContentStatus {
+  draft
+  pending
+  published
+  archived
+}
+
+// ========================================
+// NOTIFICATIONS
+// ========================================
+
+model Notification {
+  id            String            @id @default(uuid())
+  userId        String            @map("user_id")
+  user          User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  type          NotificationType
+  title         String
+  message       String
+  
+  // Reference
+  referenceType String?           @map("reference_type")
+  referenceId   String?           @map("reference_id")
+  
+  // Channels
+  channels      String[]          // email, sms, push
+  
+  // Status
+  read          Boolean           @default(false)
+  emailSent     Boolean           @default(false) @map("email_sent")
+  smsSent       Boolean           @default(false) @map("sms_sent")
+  
+  createdAt     DateTime          @default(now()) @map("created_at")
+  readAt        DateTime?         @map("read_at")
+  
+  @@map("notifications")
+}
+
+enum NotificationType {
+  quote_received
+  quote_accepted
+  project_update
+  payment_received
+  payment_reminder
+  milestone_completed
+  delivery_scheduled
+  general
+}
+
+// ========================================
+// ANALYTICS & TRACKING
+// ========================================
+
+model AnalyticsEvent {
+  id            String    @id @default(uuid())
+  
+  // Event details
+  category      String
+  action        String
+  label         String?
+  value         Int?
+  
+  // User
+  userId        String?   @map("user_id")
+  sessionId     String?   @map("session_id")
+  
+  // Context
+  page          String?
+  referrer      String?
+  
+  // Device
+  device        String?
+  browser       String?
+  os            String?
+  
+  // Location
+  country       String?
+  city          String?
+  
+  // UTM
+  utmSource     String?   @map("utm_source")
+  utmMedium     String?   @map("utm_medium")
+  utmCampaign   String?   @map("utm_campaign")
+  
+  // Metadata
+  metadata      Json?
+  
+  createdAt     DateTime  @default(now()) @map("created_at")
+  
+  @@index([category, action])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("analytics_events")
+}
+
+// ========================================
+// PARTNER CONFIGURATIONS
+// ========================================
+
+model PartnerConfig {
+  id              String    @id @default(uuid())
+  partnerId       String    @unique @map("partner_id")
+  
+  companyName     String    @map("company_name")
+  contactPerson   String    @map("contact_person")
+  email           String
+  phone           String?
+  
+  // Pricing
+  discountPercent Decimal   @default(0) @map("discount_percent") @db.Decimal(5, 2)
+  paymentTerms    String?   @map("payment_terms")
+  
+  // Access
+  canAccessSpecs  Boolean   @default(true) @map("can_access_specs")
+  canOrderBulk    Boolean   @default(true) @map("can_order_bulk")
+  
+  active          Boolean   @default(true)
+  
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  
+  @@map("partner_configs")
+}
